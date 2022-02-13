@@ -13,6 +13,12 @@ export default function NoteOperations() {
 	const [noteTitle, setNoteTitle] = useState("");
 	const dbInstance = collection(database, "notes");
 
+	const saveNote = () => {
+		addDoc(dbInstance, {
+			noteTitle: noteTitle,
+		});
+	};
+
 	return (
 		<>
 			<div className={styles.btnContainer}>
@@ -32,7 +38,9 @@ export default function NoteOperations() {
 			) : (
 				<></>
 			)}
-			<button className={styles.saveBtn}>Save Note</button>
+			<button onClick={saveNote} className={styles.saveBtn}>
+				Save Note
+			</button>
 		</>
 	);
 }
