@@ -8,7 +8,7 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 
 const dbInstance = collection(database, "notes");
 
-export default function NoteOperations() {
+export default function NoteOperations({ getSingleNote }) {
 	const [isInputVisible, setInputVisible] = useState(false);
 	const [noteTitle, setNoteTitle] = useState("");
 	const [noteDesc, setNoteDesc] = useState("");
@@ -79,9 +79,12 @@ export default function NoteOperations() {
 			<div className={styles.notesDisplay}>
 				{notesArray.map((note) => {
 					return (
-						<div className={styles.notesInner}>
-							<h3>{note.noteTitle}</h3>
-							<div dangerouslySetInnerHTML={{ __html: note.noteDesc }}></div>
+						<div
+							className={styles.notesInner}
+							onClick={() => getSingleNote(note.id)}
+							key={note.id}
+						>
+							<h4>{note.noteTitle}</h4>
 						</div>
 					);
 				})}
