@@ -20,6 +20,9 @@ export default function NoteOperations() {
 		addDoc(dbInstance, {
 			noteTitle: noteTitle,
 			noteDesc: noteDesc,
+		}).then(() => {
+			setNoteTitle("");
+			setNoteDesc("");
 		});
 	};
 
@@ -41,13 +44,14 @@ export default function NoteOperations() {
 						className={styles.input}
 						placeholder="Enter the Title..."
 						onChange={(e) => setNoteTitle(e.target.value)}
+						value={noteTitle}
 					/>
 				</div>
 			) : (
 				<></>
 			)}
 			<div className={styles.ReactQuill}>
-				<ReactQuill onChange={addDesc} />
+				<ReactQuill onChange={addDesc} value={noteDesc} />
 			</div>
 			<button onClick={saveNote} className={styles.saveBtn}>
 				Save Note
